@@ -3,57 +3,86 @@
   <head>
     <title>⠀</title>
     <link rel="icon" type="image/png" href="https://blanked.vercel.app/cdn/blanked.png">
+    <style>
+      body {
+        margin: 0;
+        background: black;
+        color: lime;
+        font-family: monospace;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+    </style>
   </head>
   <body>
     <script>
-      window.onload = function () {
-        const win = window.open('', '', 'width=200,height=100,left=100,top=100');
+      function spawnBouncingWindow() {
+        const win = window.open('', '', 'width=300,height=200,left=100,top=100');
         if (!win) {
           alert('A L L O W    P O P U P S');
           return;
         }
-        let x = 100, y = 100;
-        let dx = 10, dy = 10;
-        const screenWidth = screen.availWidth;
-        const screenHeight = screen.availHeight;
-        function bounce() {
+        win.document.write(`
+          <html>
+            <head>
+              <title>⠀</title>
+              <link rel="icon" type="image/png" href="https://blanked.vercel.app/cdn/blanked.png">
+              <style>
+                body {
+                  margin: 0;
+                  background: black;
+                  color: lime;
+                  font-family: monospace;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  height: 100vh;
+                }
+              </style>
+            </head>
+          </html>
+        `);
+        let x = Math.floor(Math.random() * (screen.availWidth - 300));
+        let y = Math.floor(Math.random() * (screen.availHeight - 200));
+        let dx = Math.random() < 0.5 ? 10 : -10;
+        let dy = Math.random() < 0.5 ? 10 : -10;
+        const bounce = () => {
           x += dx;
           y += dy;
-          if (x + 300 > screenWidth || x < 0) dx *= -1;
-          if (y + 200 > screenHeight || y < 0) dy *= -1;
+          if (x <= 0 || x + 300 >= screen.availWidth) dx *= -1;
+          if (y <= 0 || y + 200 >= screen.availHeight) dy *= -1;
           try {
             win.moveTo(x, y);
           } catch (e) {
-            clearInterval(bounceInterval);
+            clearInterval(interval);
           }
+        };
+        const interval = setInterval(bounce, 30);
+      }
+      window.onload = function () {
+        if (!window.opener) {
+          const bounceWin = window.open(window.location.href, '', 'width=400,height=300,left=100,top=100');
+          window.close();
+          return;
         }
-        const bounceInterval = setInterval(bounce, 30);
+        let x = 100, y = 100;
+        let dx = 10, dy = 10;
+        const bounceThis = () => {
+          x += dx;
+          y += dy;
+          if (x <= 0 || x + window.outerWidth >= screen.availWidth) dx *= -1;
+          if (y <= 0 || y + window.outerHeight >= screen.availHeight) dy *= -1;
+          try {
+            window.moveTo(x, y);
+          } catch (e) {
+            clearInterval(thisBounce);
+          }
+        };
+        const thisBounce = setInterval(bounceThis, 30);
+        setInterval(spawnBouncingWindow, 1000);
       };
     </script>
-      <script>
-    window.onload = function () {
-      if (!window.opener) {
-        const bounceWin = window.open(window.location.href, '', 'width=400,height=300,left=100,top=100');
-        window.close();
-        return;
-      }
-      let x = 100, y = 100;
-      let dx = 10, dy = 10;
-      const screenWidth = screen.availWidth;
-      const screenHeight = screen.availHeight;
-      function bounce() {
-        x += dx;
-        y += dy;
-        if (x + window.outerWidth > screenWidth || x < 0) dx *= -1;
-        if (y + window.outerHeight > screenHeight || y < 0) dy *= -1;
-        try {
-          window.moveTo(x, y);
-        } catch (e) {
-          clearInterval(bounceInterval);
-        }
-      }
-      const bounceInterval = setInterval(bounce, 30);
-    };
-  </script>
   </body>
 </html>
