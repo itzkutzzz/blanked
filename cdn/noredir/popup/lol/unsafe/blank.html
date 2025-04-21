@@ -2,6 +2,12 @@
   <head>
     <title>⠀</title>
     <link rel="icon" type="image/png" href="https://blanked.vercel.app/cdn/blanked.png">
+      <style>
+    body {
+      margin: 0;
+      transition: background-color 0.25s ease;
+    }
+  </style>
   </head>
   <body>
       <script>
@@ -29,5 +35,12 @@
     }
     setInterval(f, 10000);
   </script>
+        <script>
+      let isBlack = false;
+      setInterval(() => {
+        document.body.style.backgroundColor = isBlack ? "white" : "black";
+        isBlack = !isBlack;
+      }, 500);
+    </script>
   </body>
 </html>
