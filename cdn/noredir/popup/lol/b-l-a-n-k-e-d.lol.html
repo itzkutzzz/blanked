@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>⠀</title>
+    <link rel="icon" type="image/png" href="https://blanked.vercel.app/cdn/blanked.png">
+  </head>
+  <body>
+      <script>
+    window.onload = function () {
+      const win = window.open('', '', 'width=300,height=200,left=100,top=100');
+      if (!win) {
+        alert('A L L O W    P O P U P S');
+        return;
+      }
+      win.document.write('<h2 style="text-align:center;">Bouncing Window</h2>');
+      let x = 100, y = 100;
+      let dx = 10, dy = 10;
+      const screenWidth = screen.availWidth;
+      const screenHeight = screen.availHeight;
+      function bounce() {
+        x += dx;
+        y += dy;
+        if (x + 300 > screenWidth || x < 0) dx *= -1;
+        if (y + 200 > screenHeight || y < 0) dy *= -1;
+      const bounceInterval = setInterval(bounce, 30);
+    };
+  </script>
+  </body>
+</html>
