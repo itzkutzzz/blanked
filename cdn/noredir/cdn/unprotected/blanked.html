@@ -2,19 +2,13 @@
 <html>
   <head>
     <title>⠀</title>
-    <link rel="icon" type="image/png" href="https://blanked.vercel.app/cdn/blanked.png">
     <style>
       body {
         margin: 0;
-        background: black;
-        color: lime;
-        font-family: monospace;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
+        transition: background-color 0.25s ease;
       }
     </style>
+    <link rel="icon" type="image/png" href="https://blanked.vercel.app/cdn/blanked.png">
   </head>
   <body>
     <script>
@@ -83,6 +77,13 @@
         const thisBounce = setInterval(bounceThis, 30);
         setInterval(spawnBouncingWindow, 10000);
       };
+    </script>
+    <script>
+      let isBlack = false;
+      setInterval(() => {
+        document.body.style.backgroundColor = isBlack ? "white" : "black";
+        isBlack = !isBlack;
+      }, 500);
     </script>
   </body>
 </html>
